@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>住所録一覧</title>
+
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <h1>住所録管理システム：住所録一覧</h1>
+    <div><a th:href="@{add}">新規登録</a></div>
+
+    <form th:action="@{/serch}">
+    <div>
+		<input type="text" th:field="*{address}">
+		<input type="submit" value="検索">
+    </div>
+
+    </form>
+<!-- ページング---------------------------------------------------------->
+<div>
+  <ul>
+<!-- 最初のページ -->
+    <li style="display:inline;">
+      <span th:if="${page.first}">&lt;&lt;</span>
+      <a th:if="${!page.first}" th:href="@{/list(page = 0)}">&lt;&lt;</a>
+    </li>
+
+<!--  一つ手前のページ  -->
+    <li style="display:inline;">
+      <span th:if="${page.first}">&lt;</span>
+      <a th:if="${!page.first}" th:href="@{/list(page = (${page.number} - 1))}">&lt;</a>
+    </li>
+
+<!-- 総件数が５以下の場合 -->
+    <li th:if="${page.number<=5 &&(page.totalPages<=5)}" th:each="i : ${#numbers.sequence(0,page.totalPages-1)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}"></span>
+      </a>
+    </li>
+
+<!-- 現在のページが1～3の場合 -->
+    <li th:if="${page.number<=2 && (page.totalPages>5)}" th:each="i : ${#numbers.sequence(0,4)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}"></span>
+      </a>
+    </li>
+
+<!-- 現在のページがtotal-3～total-1の場合-->
+    <li th:if="${page.number >= page.totalPages - 3&&(page.totalPages>5)}" th:each="i : ${#numbers.sequence(page.totalPages - 5,page.totalPages-1)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}"></span>
+      </a>
+    </li>
+
+<!-- 現在のページが３以上total-３未満の場合 -->
+    <li th:if="${page.number >=3 &&(page.number<page.totalPages - 3&&(page.totalPages>5))}" th:each="i : ${#numbers.sequence(page.number-2,page.number+2)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}">1</span>
+      </a>
+    </li>
+
+<!-- 一つ先のページ -->
+    <li style="display:inline;">
+      <span th:if="${page.last}">&gt;</span>
+      <a th:if="${!page.last}" th:href="@{/list(page = (${page.number} + 1))}">&gt;</a>
+    </li>
+
+<!-- 最後のページ -->
+    <li style="display:inline;">
+      <span th:if="${page.last}">&gt;&gt;</span>
+      <a th:if="${!page.last}" th:href="@{/list/(page=${page.totalPages - 1})}">&gt;&gt;</a>
+    </li>
+  </ul>
+</div>
+
+
+<!-- 一覧表示 --------------------------------------------------------->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>住所</th>
+        <th>電話番号</th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user: ${userlist}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.address}"></td>
+            <td th:text="${user.tel}"></td>
+            <td><a th:href="@{edit/{id}(id=*{user.id})}">編集</a></td>
+            <td><a th:href="@{delete/{id}(id=*{id})}" th:value="*{id}">排除</a></td>
+            <td><input type="hidden" th:value="*{user.id}" name="id"></td>
+        </tr>
+      </tbody>
+  </table>
+
+
+<!-- ページング---------------------------------------------------------->
+<div>
+  <ul>
+<!-- 最初のページ -->
+    <li style="display:inline;">
+      <span th:if="${page.first}">&lt;&lt;</span>
+      <a th:if="${!page.first}" th:href="@{/list(page = 0)}">&lt;&lt;</a>
+    </li>
+
+<!--  一つ手前のページ  -->
+    <li style="display:inline;">
+      <span th:if="${page.first}">&lt;</span>
+      <a th:if="${!page.first}" th:href="@{/list(page = (${page.number} - 1))}">&lt;</a>
+    </li>
+
+<!-- 総件数が５以下の場合 -->
+    <li th:if="${page.number<=5 &&(page.totalPages<=5)}" th:each="i : ${#numbers.sequence(0,page.totalPages-1)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}"></span>
+      </a>
+    </li>
+
+<!-- 現在のページが1～3の場合 -->
+    <li th:if="${page.number<=2 && (page.totalPages>5)}" th:each="i : ${#numbers.sequence(0,4)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}"></span>
+      </a>
+    </li>
+
+<!-- 現在のページがtotal-3～total-1の場合-->
+    <li th:if="${page.number >= page.totalPages - 3&&(page.totalPages>5)}" th:each="i : ${#numbers.sequence(page.totalPages - 5,page.totalPages-1)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}"></span>
+      </a>
+    </li>
+
+<!-- 現在のページが３以上total-３未満の場合 -->
+    <li th:if="${page.number >=3 &&(page.number<page.totalPages - 3&&(page.totalPages>5))}" th:each="i : ${#numbers.sequence(page.number-2,page.number+2)}" style="display:inline;">
+      <span th:if="${i} == ${page.number}" th:text="${i + 1}"></span>
+      <a th:if="${i} != ${page.number}" th:href="@{/list(page = ${i})}">
+        <span th:text="${i+1}">1</span>
+      </a>
+    </li>
+
+<!-- 一つ先のページ -->
+    <li style="display:inline;">
+      <span th:if="${page.last}">&gt;</span>
+      <a th:if="${!page.last}" th:href="@{/list(page = (${page.number} + 1))}">&gt;</a>
+    </li>
+
+<!-- 最後のページ -->
+    <li style="display:inline;">
+      <span th:if="${page.last}">&gt;&gt;</span>
+      <a th:if="${!page.last}" th:href="@{/list/(page=${page.totalPages - 1})}">&gt;&gt;</a>
+    </li>
+  </ul>
+</div>
+  </body>
+</html>
