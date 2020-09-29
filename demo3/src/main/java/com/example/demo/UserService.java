@@ -19,10 +19,10 @@ public class UserService {
     return userRepository.findAll(pageable);
   }
 //住所一覧 住所検索
-public Page<User> findUsers(String address,Pageable pageable){
-
+public Page<User> serch(String address,Pageable pageable){
 	    return userRepository.findUsers(address,pageable);
 	  }
+
 
 //新規登録
   public void create(UserRequest UserRequest) {

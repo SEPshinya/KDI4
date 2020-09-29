@@ -9,9 +9,9 @@
     <h1>住所録管理システム：住所録一覧</h1>
     <div><a th:href="@{add}">新規登録</a></div>
 <!-- 検索 --------------------------------------------------------------->
-    <form th:action="@{serch}"method="get">
+    <form action="@{serch}" method="get">
     	<div>
-			<input type="text" name=address>
+			<input type="text" name="address">
 			<input type="submit" value="検索">
     	</div>
 	</form>

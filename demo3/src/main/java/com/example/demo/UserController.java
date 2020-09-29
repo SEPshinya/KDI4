@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -24,20 +25,20 @@ public class UserController {
 //一覧画面を表示----------------------------------------------------------------------------------------------------
   @GetMapping(value = "/list")
   public String List(@PageableDefault(page=0,size=10)Pageable pageable,Model model) {
+
 	Page<User> userPage=userService.getUser(pageable);
     model.addAttribute("page",userPage);
     model.addAttribute("userlist",userPage.getContent());
     return "/list";
   }
 
-//検索機能----------------------------------------------------------------------------------------------------------
-  @RequestMapping(value ="/list/serch",method = RequestMethod.GET)
-  //@GetMapping("{id}")
-  public String findUsers(@PageableDefault(page=0,size=10)Pageable pageable,@PathVariable String address, Model model) {
-    Page<User> userPage= userService.findUsers(address,pageable);
-    model.addAttribute("page",userPage);
-    model.addAttribute("userlist",userPage.getContent());
-    return "/list/serch";
+//検索機能
+  @GetMapping(value ="/serch")
+  public String serch(@PageableDefault(page=0,size=10)Pageable pageable,@RequestParam String address,Model model) {
+    Page<User> user = userService.serch(address,pageable);
+    model.addAttribute("page",user);
+    model.addAttribute("userlist", user.getContent());
+    return "/serch";
   }
 
 //新規登録画面を表示------------------------------------------------------------------------------------------------
@@ -56,7 +57,7 @@ public class UserController {
   public String create(@Validated @ModelAttribute UserRequest userRequest, Model model) {
     // ユーザー情報の登録
     userService.create(userRequest);
-    return "redirect:/list";
+    return "create";
   }
 
 
