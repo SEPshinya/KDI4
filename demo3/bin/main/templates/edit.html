@@ -2,33 +2,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>住所録：編集</title>
-
+<link href="../css/addedit.css" rel="stylesheet"></link>
     <meta charset="utf-8" />
   </head>
   <body>
-  <h1>住所録：編集</h1>
+  <h1>住所録管理システム：編集</h1>
   <form action="#" th:action="@{/editcheck}" th:object="${userUpdateRequest}" method="post">
   <table>
     <tr>
-      <th class="cell_title">名前</th>
-      <th class="cell_required"></th>
-      <td><input type="text" th:field="*{name}" th:value="*{name}"></td>
+      <th>名前</th>
+      <th></th>
+      <td><input type="text" class="nametext" th:field="*{name}" th:value="*{name}"></td>
     </tr>
     <tr>
-      <th class="cell_title">住所</th>
-      <th class="cell_required"></th>
-      <td><input type="text" th:field="*{address}" th:value="*{address}"></td>
+      <th>住所</th>
+      <th></th>
+      <td><input type="text" class="addresstext" th:field="*{address}" th:value="*{address}"></td>
     </tr>
     <tr>
-      <th class="cell_title">電話番号</th>
-      <th class="cell_required"></th>
-      <td><input type="text" th:field="*{tel}" th:value="*{tel}"></td>
+      <th>電話番号</th>
+      <th></th>
+      <td><input type="text" class="teltext" th:field="*{tel}" th:value="*{tel}"></td>
     </tr>
   </table>
-  <div class="btn_area_center">
+  <div class="btnarea">
   <input type="button" onclick="location.href='/list'" value="戻る">
-  <input type="submit"  value="確認" class="btn">
+  <input type="submit"  value="確認">
   </div>
+        <table>
+    	<tr th:if="${validationError}" th:each="error : ${validationError}">
+      <td style="color:red;" th:text="${error}"></td>
+    </tr>
+  </table>
   <input type="hidden" th:value="*{id}" th:field="*{id}"name="id">
   </form>
   </body>

@@ -16,13 +16,12 @@ public class UserService {
 
 //住所一覧 全検索
   public Page<User> getUser(Pageable pageable){
-    return userRepository.findAll(pageable);
-  }
-//住所一覧 住所検索
-public Page<User> serch(String address,Pageable pageable){
-	    return userRepository.findUsers(address,pageable);
+	  return userRepository.findAll(pageable);
 	  }
-
+//住所一覧 住所検索
+  public Page<User> serch(String address,Pageable pageable){
+	  return userRepository.findUsers(address,pageable);
+	  }
 
 //新規登録
   public void create(UserRequest UserRequest) {
@@ -45,7 +44,7 @@ public Page<User> serch(String address,Pageable pageable){
   }
 
 //削除
-  public void deleteflg(UserUpdateRequest userUpdateRequest) {
+  public void deletecommit(UserUpdateRequest userUpdateRequest) {
     User user = findById(userUpdateRequest.getId());
     user.setAddress(userUpdateRequest.getAddress());
     user.setName(userUpdateRequest.getName());

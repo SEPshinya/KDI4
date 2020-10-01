@@ -2,36 +2,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>住所録削除</title>
-    <link href="add.css" rel="stylesheet"></link>
+    <link href="../css/check.css" rel="stylesheet"></link>
     <meta charset="utf-8" />
   </head>
   <body>
 
-
-    <P>下記住所録を削除します。よろしいですか？</P>
-    <form th:action="@{/deleteflg}" th:method="post" th:object="${UserUpdateRequest}">
+	<h1>住所録管理システム:削除</h1>
+    <form th:action="@{/deletecommit}" th:method="post" th:object="${UserUpdateRequest}">
+    <p>下記住所録を削除します。よろしいですか？</p>
     <table>
       <tr>
-        <th class="cell_title">名前</th>
-        <th class="cell_required">*</th>
-        <td th:text="*{name}"></td>
+        <th align="right">名前</th>
+        <th align="right">*</th>
+        <td class="nametext" th:text="*{name}"th:field="*{name}" th:value="*{name}"name="name"></td>
       </tr>
       <tr>
-        <th class="cell_title">住所</th>
-        <th class="cell_required">*</th>
-        <td th:text="*{address}"></td>
+        <th align="right">住所</th>
+        <th align="right">*</th>
+        <td class="addresstext"th:text="*{address}" th:field="*{address}" th:value="*{address}"name="address"></td>
       </tr>
       <tr>
-        <th class="cell_title">電話番号</th>
-        <th class="cell_required"></th>
-        <td th:text="*{tel}"></td>
+        <th align="right">電話番号</th>
+        <th align="right"> </th>
+        <td class="teltext" th:text="*{tel}" th:field="*{tel}" th:value="*{tel}"name="tel"></td>
       </tr>
+      <tr class="btnarea">
+      	<th></th>
+      	<th><input type="button" onclick="location.href='/list'" value="戻る"></th>
+  		<th><input type="submit"  value="確認"></th>
+  		</tr>
+  		<input type="hidden" th:value="*{id}" th:field="*{id}"name="id">
+  		<input type="hidden" th:value="*{name}" th:field="*{name}"name="name">
+  		<input type="hidden" th:value="*{address}" th:field="*{address}"name="address">
+  		<input type="hidden" th:value="*{tel}" th:field="*{tel}"name="tel">
     </table>
-  <input type="hidden" th:value="*{id}" th:field="*{id}"name="id">
-  <div class="btn_area_center">
-  	<input type="button" onclick="location.href='/list'" value="戻る">
-  	<input type="submit"  value="確認" class="btn">
-  </div>
   </form>
   </body>
 </html>

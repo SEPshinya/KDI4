@@ -3,15 +3,16 @@
   <head>
     <title>住所録一覧</title>
 
+	<link href="../css/list.css" rel="stylesheet"></link>
     <meta charset="utf-8" />
   </head>
   <body>
     <h1>住所録管理システム：住所録一覧</h1>
     <div><a th:href="@{add}">新規登録</a></div>
 <!-- 検索 --------------------------------------------------------------->
-    <form action="@{serch}" method="get">
-    	<div>
-			<input type="text" name="address">
+    <form th:action="@{serch}"method="get">
+		<div class="serch" align="right">
+    		<input type="text" name=address>
 			<input type="submit" value="検索">
     	</div>
 	</form>
@@ -78,9 +79,9 @@
 
 
 <!-- 一覧表示 --------------------------------------------------------->
-  <table>
+  <table class="list">
     <thead>
-      <tr>
+      <tr bgcolor="#1e90ff">
         <th>ID</th>
         <th>名前</th>
         <th>住所</th>
@@ -89,14 +90,16 @@
       </tr>
     </thead>
     <tbody>
-        <tr th:each="user: ${userlist}">
+        <tr th:each="user:${userlist}">
             <td th:text="${user.id}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.address}"></td>
             <td th:text="${user.tel}"></td>
-            <td><a th:href="@{edit/{id}(id=*{user.id})}">編集</a></td>
-            <td><a th:href="@{delete/{id}(id=*{id})}" th:value="*{id}">排除</a></td>
-            <td><input type="hidden" th:value="*{user.id}" name="id"></td>
+            <td align="center" bgcolor="#808080">
+            <a th:href="@{edit/{id}(id=*{user.id})}">編集</a>
+            <a th:href="@{delete/{id}(id=*{user.id})}" th:value="*{id}">排除</a>
+            </td>
+
         </tr>
       </tbody>
   </table>

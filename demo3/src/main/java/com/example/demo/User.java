@@ -9,9 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-/**
- * ユーザー情報 Entity
- */
+//ユーザー情報 Entity
 @Entity
 @Data
 @Table(name="jyusyoroku")
@@ -23,16 +21,19 @@ public class User implements Serializable {
   private Long id;
 
   //名前
+
   @Column(name="name")
   private String name;
 
   //住所
+
   @Column(name="address")
   private String address;
 
   //電話
   @Column(name="tel")
   private String tel;
+
 
   //削除フラグ
   @Column(name="delete_flg")

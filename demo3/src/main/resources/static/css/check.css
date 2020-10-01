@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+body {
+  width: 90%;
+  min-width:60%;
+  max-width:100%;
+}
+
+table{
+    width:50%;
+    border-collapse: collapse;
+  	font-size: 16px;
+  	padding: 6px;
+}
+
+.nametext{
+	width:200px;
+}
+.addresstext{
+	width:350px:50px;
+}
+
+.teltext{
+	width:200px;
+}
+
+.btnarea{
+	width:50%;
+	text-align: center;
+	align:center;
+}
+ul{
+	pddding:9px;
+}
