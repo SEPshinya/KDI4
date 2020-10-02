@@ -23,3 +23,13 @@ table th {
 ul{
 	margin:1px
 }
+.list{
+	background: #eee;
+  	overflow: hidden;
+  	width: 100%;
+  	  td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

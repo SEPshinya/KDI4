@@ -24,17 +24,12 @@
         <th></th>
         <td>:<input type="text" class="teltext" th:field="*{tel}"></td>
       </tr>
-    </table>
-      <table>
-    	<tr th:if="${validationError}" th:each="error : ${validationError}">
-      <td style="color:red;" th:text="${error}"></td>
-    </tr>
-  </table>
+     </table>
+		<div align="center" class="btnarea">
+ 			<input type="button" value="戻る" onclick="history.back()">
+  			<input type="submit"  value="確認">
+  		</div>
 
-  <div align="center" class="btnarea">
-  	<input type="button" onclick="location.href='/list'" value="戻る" >
-  	<input type="submit"  value="確認">
-  </div>
-  </form>
-  </body>
+  	</form>
+  	</body>
 </html>

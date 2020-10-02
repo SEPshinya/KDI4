@@ -33,6 +33,7 @@ public class User implements Serializable {
   //電話
   @Column(name="tel")
   private String tel;
+  
 
 
   //削除フラグ

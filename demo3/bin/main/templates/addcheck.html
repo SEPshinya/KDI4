@@ -28,18 +28,16 @@
         <div>
         <input type="hidden" name="name" th:value="${UserRequest.name}" />
         <input type="hidden" name="address" th:value="*{UserRequest.address}" />
-         <input type="hidden" name="tel" th:value="${UserRequest.tel}" />
+        <input type="hidden" name="tel" th:value="${UserRequest.tel}" />
     </div>
-
-  <div class="btn_area_center">
-  	<input type="button" onclick="location.href='/add'" value="戻る">
-  	<input type="submit"  value="確認" class="btn">
-  </div>
+	<div class="btnarea">
+    <input type="button" value="戻る" onclick="history.back()">
+    <input type="submit"  value="確認" class="btn">
+    </div>
        <table>
-    <tr th:if="${validationError}" th:each="error : ${validationError}">
-      <td style="color:red;" th:text="${error}"></td>
-    </tr>
-  </table>
+          <tr th:if="${validationError}" th:each="error : ${validationError}">
+          <td style="color:red;" th:text="${error}"></td></tr>
+       </table>
   </form>
   </body>
 </html>

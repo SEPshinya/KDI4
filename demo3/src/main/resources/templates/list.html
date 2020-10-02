@@ -72,7 +72,7 @@
 <!-- 最後のページ -->
     <li style="display:inline;">
       <span th:if="${page.last}">&gt;&gt;</span>
-      <a th:if="${!page.last}" th:href="@{/list/(page=${page.totalPages - 1})}">&gt;&gt;</a>
+      <a th:if="${!page.last}" th:href="@{/list(page=${page.totalPages - 1})}">&gt;&gt;</a>
     </li>
   </ul>
 </div>
@@ -161,7 +161,7 @@
 <!-- 最後のページ -->
     <li style="display:inline;">
       <span th:if="${page.last}">&gt;&gt;</span>
-      <a th:if="${!page.last}" th:href="@{/list/(page=${page.totalPages - 1})}">&gt;&gt;</a>
+      <a th:if="${!page.last}" th:href="@{/list(page=${page.totalPages - 1})}">&gt;&gt;</a>
     </li>
   </ul>
 </div>

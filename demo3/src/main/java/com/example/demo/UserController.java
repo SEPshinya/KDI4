@@ -28,7 +28,6 @@ public class UserController {
 //一覧画面を表示----------------------------------------------------------------------------------------------------
   @GetMapping(value = "/list")
   public String List(@PageableDefault(page=0,size=10)Pageable pageable,Model model) {
-
 	Page<User> userPage=userService.getUser(pageable);
     model.addAttribute("page",userPage);
     model.addAttribute("userlist",userPage.getContent());
@@ -55,7 +54,7 @@ public class UserController {
   @RequestMapping(value = "/addcheck",method = RequestMethod.POST)
   public String addcheck(@Validated @ModelAttribute("UserRequest")UserRequest form, BindingResult result,User user ,Model model) {
 	    if (result.hasErrors()) {
-	        List<String> errorList = new ArrayList<String>();
+	        List<String> errorList = new ArrayList<String>(); //エラー表示
 	        for (ObjectError error : result.getAllErrors()) {
 	          errorList.add(error.getDefaultMessage());
 	        }
@@ -66,16 +65,15 @@ public class UserController {
 	    	  return "/addcheck";
 	      }
   }
+  //登録
   @RequestMapping(value = "create", method = RequestMethod.POST)
   public String create(@Validated @ModelAttribute UserRequest userRequest, Model model) {
-    // ユーザー情報の登録
     userService.create(userRequest);
     return "redirect:/list";
   }
 
 //編集画面を表示-----------------------------------------------------------------------------------------------------
   @RequestMapping(value ="/edit/{id}",method = RequestMethod.GET)
-  //@GetMapping("{id}")
   public String edit(@PathVariable Long id, Model model) {
     User user = userService.findById(id);
     model.addAttribute("userUpdateRequest", user);
@@ -84,33 +82,34 @@ public class UserController {
 
 //編集確認画面
   @RequestMapping(value = "/editcheck",method = RequestMethod.POST)
-  public String editcheck(@Validated @ModelAttribute("UserUpdateRequest")UserUpdateRequest form,User user,Long id,BindingResult result,UserRequest userRequest, Model model) {
+  public String editcheck(@Validated @ModelAttribute("UserUpdateRequest")UserUpdateRequest form,BindingResult result,Long id, Model model) {
 	    if (result.hasErrors()) {
-	        List<String> errorList = new ArrayList<String>();
+	        List<String> errorList = new ArrayList<String>(); //エラー表示
 	        for (ObjectError error : result.getAllErrors()) {
 	          errorList.add(error.getDefaultMessage());
 	        }
 			model.addAttribute("validationError", errorList);
 	        model.addAttribute("userUpdateRequest",new UserUpdateRequest());
-	        return "edit";
+	        return "/edit";
 	      }else{
-	    	  return "/editcheck";
+	    	 return "editcheck";
 	      }
   }
+
+  // ユーザー情報の登録
   @RequestMapping(value = "update", method = RequestMethod.POST)
   public String update(@Validated @ModelAttribute UserUpdateRequest userUpdateRequest, BindingResult result, Model model, UserRequest UserRequest) {
-    // ユーザー情報の登録
     userService.update(userUpdateRequest);
     return "redirect:/list";
   }
 
   //排除---------------------------------------------------------------------------------------------------------------
   @RequestMapping(value ="/delete/{id}",method = RequestMethod.GET)
-  //@GetMapping("{id}")
   public String delete(@PathVariable Long id,Model model ) {
     User user = userService.findById(id);
     model.addAttribute("UserUpdateRequest", user);
-    return "delete";}
+    return "/delete";
+    }
 
   @RequestMapping(value = "deletecommit", method = RequestMethod.POST)
   public String deletecommit(@ModelAttribute("userUpdateRequest")UserUpdateRequest form,UserUpdateRequest userUpdateRequest) {
@@ -119,4 +118,3 @@ public class UserController {
   }
 
 }
-//--------------------------------------------------------------------------------------------------------------------

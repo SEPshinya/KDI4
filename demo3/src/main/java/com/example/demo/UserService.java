@@ -28,17 +28,26 @@ public class UserService {
     User user = new User();
     user.setName(UserRequest.getName());
     user.setAddress(UserRequest.getAddress());
-    user.setTel(UserRequest.getTel());
     user.setDelete_flg("0");
+    String tel=(UserRequest.getTel());
+    if(tel!=null) {
+    tel=tel.replace("-", "");
+    }
+    user.setTel(tel);
     userRepository.save(user);
   }
 
 //編集登録
   public void update(UserUpdateRequest userUpdateRequest) {
-    User user = findById(userUpdateRequest.getId());
+    User user = new User();
+    user=findById(userUpdateRequest.getId());
     user.setAddress(userUpdateRequest.getAddress());
     user.setName(userUpdateRequest.getName());
-    user.setTel(userUpdateRequest.getTel());
+    String tel=(userUpdateRequest.getTel());
+    if(tel!=null) {
+    tel=tel.replace("-","");
+    }
+    user.setTel(tel);
     user.setDelete_flg("0");
     userRepository.save(user);
   }

@@ -16,24 +16,24 @@
         <td th:text="${UserUpdateRequest.name}"></td>
       </tr>
       <tr>
-        <th class="cell_title">住所</th>
-        <th class="cell_required">*</th>
+        <th>住所</th>
+        <th >*</th>
         <td th:text="${UserUpdateRequest.address}"></td>
       </tr>
       <tr>
-        <th class="cell_title">電話番号</th>
-        <th class="cell_required"></th>
+        <th>電話番号</th>
+        <th></th>
         <td th:text="${UserUpdateRequest.tel}"></td>
       </tr>
     </table>
-        <div>
-        <input type="hidden" name="name" th:value="${UserUpdateRequest.name}" />
-        <input type="hidden" name="address" th:value="*{UserUpdateRequest.address}" />
+         <input type="hidden" name="id" th:value="${UserUpdateRequest.id}" />
+
+         <input type="hidden" name="name" th:value="${UserUpdateRequest.name}" />
+         <input type="hidden" name="address" th:value="*{UserUpdateRequest.address}" />
          <input type="hidden" name="tel" th:value="${UserUpdateRequest.tel}" />
          <input type="hidden" name="id" th:value="${UserUpdateRequest.id}" />
-    </div>
 
-    <div class="btn_area_center">
+    <div class="btnarea">
     	<input type="button" value="戻る" onclick="history.back()">
     	<input type="submit" value="登録" class="btn">
     </div>
